@@ -1,0 +1,32 @@
+01.23.22 Started. 
+
+· Nested Routing in Shop Page
+·
+·
+·
+
+
+
+# Nested Routing in Shop Page
+- Refresher on +match+, +location+ and +history+: 
+  > whatever that is wrapped by +Route+ has these three properties: +match+, +location+ and +history+;
+  > +Match+:
+    · path: (string), the path pattern used to match. Useful for building nested routes. 
+    ·
+    ·
+
+- **ShopPage** is already in a Route. To render another component inside this route, we will need
+  to bring in the match property (match, location history which we have access to from React Router). 
+
+
+```
+<Route exact path={`${match.path}`} component={CollectionsOverview} />
+<Route path={`${match.path}/:collectionId`} component={CollectionPage} />
+
+/shop/:collection
+```
+
+- The /:collectionId (/:[name]) is a paramater. 
+
+ 
+

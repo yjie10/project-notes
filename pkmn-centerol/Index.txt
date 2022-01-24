@@ -1,0 +1,8 @@
+01 : Setting Up E-commerce Project
+02 : React Router and Routing
+03 : Forms + Components
+04 : Firebase + User Authentication
+05 : Redux 1
+06 : Session Storage + Persistence
+07 : Redux 2
+08 : Advanced Routing

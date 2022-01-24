@@ -1,0 +1,64 @@
+01.24.22 Started. 
+
+· Routing
+· React Router DOM
+·
+
+- <Route> 3 arguments to focus on: exact, path and component. 
+  > exact: bool; when true, will only match if the path matches the location.pathname exactly. (官方)
+  > path: string | string []; any valid URL path or array of paths. (官方)
+  > component: the component we want to render. 
+
+- The moment <Switch> finds a match, it will not render anything else
+  other than the match it found first. 
+  /* A <Switch> looks through all its children <Route> 
+     elements and renders the first one whose path matches
+     the current URL. (https://v5.reactrouter.com/web/example/basic)
+  */
+
+- There are two ways to _navigate_ in react-router-dom between pages:
+  > 1. <Link>
+    · <Link to='/destination'>Destination</Link>
+  > 2. history.push() 
+    · can be used with button -> <button onClick={() => props.history.push('/destination')}>
+    · kind of equivalent to using <Link> but give more dynamic access
+
+- Any component that gets rendered by <Route> gets passed 3 props:
+  > 1. history;
+  > 2. location;
+  > 3. match;
+
+- 1: history: 
+  > important prop/methods of history object to explore are:
+    · push(path, [state]): function; pushes a new entry onto the history stack. 
+
+- 2: location:
+  > Represents where the app is now, where you want it to go, or where it was. 
+  > Also found on history.location but it shouldn't be used because it's mutable.
+  > Location object is _NEVER_ mutated. 
+  > important prop to focus: 
+    · pathname: string; gives the full pathname that was entered.
+
+- 3: match:
+  > match objects contain the following properties: 
+    · params: object; key/value pairs parsed from the URL corresponding to
+      the dynamic segments of the path. 
+    · isExact: boolean; true if the entire URL was matched. 
+    · url: string; the URL of our component that was rendered. The matched
+      portion of the URL. 
+    · path: string; the path pattern used to match. 
+      
+      ```
+      <Route path='/' component={HomePage} />
+      <Route path='/topics' component={TopicsList} />
+      <Route path='/topics/:topicId' component={TopicDetail} />
+
+      // (url) without exact keyword for HomePage, will result in both component 
+        to be rendered, but url property will only return '/'
+      // (path) the path prop for HomePage will be '/' and 
+         '/topics' for TopicsList
+      // (params) /:topicId is a URL/route parameter; match up until 'topics' and
+         anything afterwards can be dynamic
+      // (params) say the url is /topics/28, we can access the param and get the ID by
+         props.match.params.topicId which is useful if we want to display the information
+      ```
