@@ -1,0 +1,27 @@
+01.25.22 Started. 
+
+· Data Normalization
+· Data Flow In Our App
+· Thinking About Data Flow
+
+# Data Normalization
+- As mentioned before, there are two ways of storing shop data inside our reducer.
+
+- Currently, the data stored is in the form of an array, and we are calling .find() in the
+  selector, matching the id based off of the UrlParam we get from our Url. 
+
+  ```
+  collections => collections.find(collection => collection.id === COLLECTION_ID_MAP[collectionUrlParam])
+  ```
+
+- The issue with .find() is whenever we call it in our array, it will loop through every element. 
+  In a worst case scenario, say we have 1000 collections, and the collection we are looking for appears to
+  be the last element from the array. It will loop through the whole array until it finds the match at the 
+  end, which this results in a performance issue. 
+
+- Instead, we can store it in an object. The concept of storing list of elements inside an object
+  instead of an array is called _Data Normalization_. 
+  
+- Note: the items are still in the form of an array. If we ever want a page for each individual item, 
+  then we might convert it to an object as well. But in this project won't be doing so. 
+  Just something to better keep note of for my future projects.

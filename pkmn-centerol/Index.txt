@@ -6,3 +6,4 @@
 06 : Session Storage + Persistence
 07 : Redux 2
 08 : Advanced Routing
+09 : State Normalization
