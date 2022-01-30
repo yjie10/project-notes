@@ -1,0 +1,18 @@
+
+
+
+1. brew tap heroku/brew && brew install heroku (for Mac OS)
+2. terminal: heroku login
+3. heroku create [proj name] --buildpack https://github.com/mars/create-react-app-buildpack.git 
+  (most efficient for static react apps)
+4. git push heroku main
+
+Optimizing Production Build
+
+What is logger? What is middleware?
+```
+// checks the environment, either development, production or test
+if (process.env.NODE_ENV === 'development') {
+  middlewares.push(logger);
+}
+```

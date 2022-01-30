@@ -1,0 +1,23 @@
+01.29.22 Started. 
+
+flaws of CSS. 
+
+CSS shares one single global namespace. 
+e.g. I assigned className 'card' to one element, and
+     someone else also assigned the same className 'card'
+     to another element without knowing it repeated the className, 
+     then they might get the styles I wrote for my element.
+
+React lets us import the stylesheet for visual purposes so we know the 
+style sheet is related to the component. But the rules of CSS actually 
+has not been changed. 
+
+Solution: 
+  > 1. BEM (Block Element Modifier) - follow a certain naming pattern. 
+    · issue: can result in very long and nested class name;
+  > 2. Style and creating JS object.  
+    · issue: cannot access some selectors, like :hover and nth-child. 
+  > 3. CSS in JS. 
+    · popular library: styled-component
+    · cons: 有些人还是习惯css归css, js归js. 
+    · pros: performance is well, extremely fast. (does depend on the App. )
