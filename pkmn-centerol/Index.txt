@@ -10,3 +10,4 @@
 10 : Stripe Payments Part 1
 11 : Deploying To Production
 12 : CSS in JS-styled-components
+13 : Advanced Redux + Firebase

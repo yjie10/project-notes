@@ -1,0 +1,106 @@
+
+
+/* Firebase Refresher */
+
+Refresher: 
+QueryReferences, Snapshots and Security Rules.
+
+We get two types of objects from Firestore when we make a query (a request we make to get something from the database).
+These two objects are:
+  > 1. references
+  > 2. snapshots
+Of those two type of objects, they can be either Document or Collection. 
+  > 1. Document or Collection reference object
+  > 2. Document or Collection snapshot object
+       · collection snapshot object is called _QuerySnapshot_
+
+Firestore will _always_ return us these objects, even if nothing exists in that query. 
+
+# QueryReference
+- an object that represents the "current" place in the database that we are querying
+- to get a queryReference object, we get by calling one of the below methods: 
+  ```
+  firestore.doc('/users/:userId'); // document
+  firestore.collections('/users'); // collection
+  ```
+
+- the queryReference object _does not_ have the actual data of the collection or document;
+  it just represents the place in the path;
+- instead has properties that tell us details about it, or the method to get the 
+  Snapshot object which give us the data we are looking for. 
+
+## DocumentReference vs CollectionReference
+- the two types of objects we can get, either document or collection reference;
+- documentRef objects are used to perform CRUD methods (create, retreive, update, delete);
+  .set(), .get(), .update(), .delete()
+- we can also add documents to collections using the collectionRef object using the .add() method.
+  ```
+  collectionRef.add({value: prop})
+  ```
+
+- we get snapshotObject from the referenceObject using the .get() method. 
+  ```
+  documentRef.get() // returns documentSnapshot object
+  // or
+  collectionReg.get() // returns querySnapshot object
+  ```
+
+## DocumentSnapshot
+- we get a documentSnapshot object from documentReference object.
+- documentSnapshot object allows us to check if a document exists at this query
+  using the .exists property which returns a boolean. 
+- we can also get the actual properties on the object by calling the .data()
+  method, which returns us a JSON object of the document. 
+
+```
+const userRef = firestore.doc(`users/${userAuth.uid}`); // code wrote for proj
+
+// if we were to use a made-up id
+... firestore.doc(`users/randomidthatDNE`);
+
+// if we console.log the above, we get the DocumentReference object with following:
+{
+  firestore: ...,
+  id: "randomidthatDNE",
+  parent: (...),
+  path: "users/randomidthatDNE"
+} // this for sure does not exist in our DB, but we still gets the object
+
+// and then we get the snapshot with the userRef we made
+const snapShot = await userRef.get();
+
+// same with DocumentReference, even if query DNE, we'd still get snapshot object
+{
+  exists: false,
+  id: "randomidthatDNE",
+  ...
+}
+```
+
+## CollectionSnapshot / QuerySnapshot
+- we get a querySnapshot object from our collectionReference object. 
+- it is very similar to the documentSnapshot object that was mentioned above,
+  just there's a couple different property as we are looking at a collection.
+- we can check if there are any documents in the collection by calling the 
+  .empty property which returns a boolean. 
+
+```
+const collectionRef = firestore.collection('users');
+
+
+const collectionSnapshot = await collectionRef.get();
+
+// we care about docs, empty and size
+{
+  docs: [...], // array of QueryDocumentSnapshot 
+  empty: false,
+  size: 3 // tells how many objects are inside of docs
+}
+
+// fetching data
+collectionSnapshot.docs.map(doc => doc.data());
+
+
+```
+
+   
