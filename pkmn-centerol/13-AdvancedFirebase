@@ -103,4 +103,9 @@ collectionSnapshot.docs.map(doc => doc.data());
 
 ```
 
-   
+# NoSQL Database
+- Firebase is a NoSQL Database. 
+- Can have any properties / values. 
+- property types include: string, number, boolean (JS obj that always have a unique key),
+                          array (不是熟知的array而是和map差不多just w/ index as key), null, timestamp, 
+                          geopoint (kinda like coordinate)

@@ -9,8 +9,7 @@
   > path: string | string []; any valid URL path or array of paths. (官方)
   > component: the component we want to render. 
 
-- The moment <Switch> finds a match, it will not render anything else
-  other than the match it found first. 
+- The moment <Switch> finds a match, it will not render anything else other than the match it found first. 
   /* A <Switch> looks through all its children <Route> 
      elements and renders the first one whose path matches
      the current URL. (https://v5.reactrouter.com/web/example/basic)
