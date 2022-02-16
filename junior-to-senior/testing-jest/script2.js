@@ -9,13 +9,14 @@ const fetch = require('node-fetch');
 const getPokemonPromise = (fetch) => {
   return fetch('https://pokeapi.co/api/v2/pokemon?limit=60&offset=60')
     .then(resp => resp.json())
-    .then(res => console.log(res.results))
+    .then(res => res.results)
 }
 
 const getPokemon = async (fetch) => {
   const getRequest = await fetch('https://pokeapi.co/api/v2/pokemon?limit=60&offset=60');
   const data = await getRequest.json();
-  return data;
+  // console.log(data.results);
+  return data.results;
 }
 
 console.log(getPokemon(fetch));
